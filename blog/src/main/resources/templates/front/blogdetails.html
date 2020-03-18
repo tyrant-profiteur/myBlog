@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>博客详情</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!--引入自定义的style-->
+    <link rel="stylesheet" href="../../static/css/me.css">
+    <!--markdown样式插件-->
+    <link rel="stylesheet" href="../../static/css/typo.css">
+    <!--动态效果插件-->
+    <link rel="stylesheet" href="../../static/css/animate.css">
+    <!--代码高亮插件-->
+    <link rel="stylesheet" href="../../static/lib/prism/prism.css">
+    <!--目录生成-->
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css">
+</head>
+<body>
+<!--导航
+        引用ui里的元素 attached:没有圆角
+-->
+<nav class="ui inverted attached segment padded-td-mini m-shadow-small">
+    <div class="ui inverted container">
+        <div class="ui inverted stackable menu">
+            <h3 class="ui teal header item"><i class="book icon"></i>Tyrant</h3>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini home icon"></i> 首页</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini info icon"></i>关于我</a>
+            <div class="head-item m-mobile-hide right item">
+                <div class="ui icon input focus inverted">
+                    <input type="text" placeholder="Search...">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui black button icon top-right m-mobile-show" id="menu-toggle">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间部位-->
+<div id="blog-container" class="padded-td-massive blog-container animated fadeIn">
+    <div class="ui container">
+        <!--头部-->
+        <div class="ui top attached segment">
+            <div class="ui horizontal small link list">
+                <div class="item">
+                    <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
+                    <div class="content">
+                        <div class="header text-thin">tyrant</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="calendar icon"></i>2020-01-01
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i>123
+                </div>
+            </div>
+        </div>
+        <!--图片-->
+        <div class="ui attached segment">
+            <img src="../../static/images/kobe.jpg" alt="" class="ui fluid rounded image">
+        </div>
+        <!--内容-->
+        <div class="ui attached padded segment">
+            <div class="ui right aligned basic segment">
+                <div class="ui red basic label">原创</div>
+            </div>
+            <!--文章内容-->
+            <h2 id="h2_1" class="ui center aligned header">第一篇博客</h2>
+            <div id="content" class="typo typo-selection js-toc-content padded-lr-big-responsive margin-td-small">
+                <h3 id="h2_1_3_1"><a id="_0"></a>开场</h3>
+                <p>​
+                    今天跟大家聊聊微服务的概念以及我对微服务的理解，目的是为了让准备学习微服务一系列知识的小伙伴大概了解一下自己都要学啥，为啥学。当然，微服务是一个概念，所有语言都适用，本篇仅以Java为例。嗯，很严肃的开场白，话不多说，开整。</p>
+                <h3 id="h2_1_3_2"><a id="_4"></a>微服务是啥？</h3>
+                <p>​ 微服务是一个 <strong>分布式</strong> 系统，主要的思路是将 <strong>应用程序</strong> 分解成 一套 由 <strong>较小</strong> 的服务组成的
+                    <strong>互联服务</strong>。</p>
+                <p>​ 这里的应用程序，指我们原来传统的 SSH 啊 SSM 架构搭建的应用，也就是单体应用。微服务火之前，大家代码写完测试完，打成一整个war包部署到服务器上或者被打包成自包含
+                    (self-contained) 的可执行 JAR，这样的应用就称为单体应用。</p>
+                <p>​ 我们举个例子，一个应用，XXX管理系统，很常见对吧，里面现有订单管理(A)，用户管理（B），通知管理（C）三个功能模块单体项目呢就是 A B
+                    C三个模块打包成一个War包，复制到服务器上，就能运行了。对于这个应用的微服务版本是什么呢，A，B，C模块都是单独的一个应用，都有自己的业务逻辑等，可以自己单独运行，每个模块都对外提供一个供他人调用的
+                    API 接口，实现模块之间的相互调用。相对于原来的ABC三个功能模块在一起的服务，每个模块做为一个服务，实现模块间的松耦合，这也就是微服务做的事儿。</p>
+                <p>
+                    <img src="https://img-blog.csdnimg.cn/20200302133210822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTA5NDk1,size_16,color_FFFFFF,t_70"
+                         alt="​" class="ui fluid image"></p>
+                <p>​ (图为打车软件，分为用户，司机，行程，通知，支付，账单六个模块)</p>
+                <p>​ 那么相对于单体应用，为什么微服务就火起来了呢？现在90%的互联网企业都要把单体应用拆成较小的互联服务？</p>
+                <h3 id="h2_1_3_3"><a id="_18"></a>为啥微服务火了？</h3>
+                <p>​ **场景一：**服务问题</p>
+                <p>​ 还是刚刚的应用，其中A模块更新了，怎么办？</p>
+                <ol>
+                    <li>打包整个项目，包含A，B，C；</li>
+                    <li>服务器关掉，拷贝打包好的应用程序部署到服务器上；</li>
+                    <li>开启服务器。</li>
+                </ol>
+                <p>​ 简不简单？步骤肯定是简单的，大体的三步，一个应用就更新完了，传统的项目大多这么启动执行的。但是越简单的问题越容易引发思考。这中间会出现什么问题？</p>
+                <p>​ A更新，可以，但是应用在没做<strong>负载均衡</strong><sup class="footnote-ref"><a href="#fn1" rel="nofollow"
+                                                                                     id="fnref1">1</a></sup>的时候，不好意思，整个服务宕机不能用。<font
+                        color="dddddd"><s>如果有人说企业怎么会不做负载均衡？不好意思，我现在在的公司就不做🙂</s></font></p>
+                <p>​
+                    服务器宕机，很糟糕的情况。而你想要部署，怎么办，只能等到整个服务不用了，才能关服务开始部署。那么微服务起了什么作用呢？A更新A的，不影响B和C的使用，如何实现的，也就是上文说的A，B，C是相互独立的应用，他们之间的可以独立运行，通过远程调用实现相互间调用，这么一看，是不是就感觉有点厉害了？还不够嘛，来看场景二。</p>
+                <p>**场景二：**时间问题</p>
+                <p>​
+                    我不但A更新了，我还新增了功能模块D，单体应用，一样的打包war停服务启动服务，这么一看是不是还是很简单，但是我们只增加了一个模块，启动时间相差不大，后来呢？我们有E,F,G,H,I,J…模块，整个应用越做越大，啧，启动一次半小时，想想就刺激。</p>
+                <p>​
+                    那么微服务能做什么呢？你有新模块了，行啊你部署呗，我原来的服务照常使用，不影响，要就服务调用新增的服务，我们再对其单独更新，松耦合的思想（此处敲黑板！）时间就是金钱，每次重启半小时，你暴躁嘛？你耐心好？好吧，我们来看场景三。</p>
+                <p>**场景三：**程序容错性（其实程序容错性有个感觉更牛逼的叫法，忘了）</p>
+                <p>​ 有一天，A报错了，会出现啥情况？单体应用所有模块都运行在同一进程中，任何模块的一个
+                    bug，比如内存泄漏，可能会拖垮整个进程。此外，由于应用程序的所有实例都是相同的，该错误将影响到整个应用的可用性。但是微服务就不一样啦，A错了，没事，先不用A，我B和C还是正常能用的，怎么感觉都比单体应用厉害呀。</p>
+                <p>**场景四：**扩展性问题</p>
+                <p>​ 假设，公司开办已过十年，十年前使用QWE框架，公司的主要服务就依靠这个了，赖以生存的根本。但是现在，不好意思，QWE已经慢慢淘汰了，公司想在现有服务上进行扩展，怎么办？</p>
+                <ol>
+                    <li>
+                        <p>接着使用QWE框架</p>
+                        <p>不要意思，现在大家都不学了，你招会用的，可以，老框架-》有经验的-》高成本。啧，花钱多，难受了。</p>
+                    </li>
+                    <li>
+                        <p>重构程序</p>
+                        <p>不要想了，时间+金钱，更复杂</p>
+                    </li>
+                </ol>
+                <p>​
+                    这也是单体应用的一个弊端，采用新的技术将会非常困难。那么微服务能干啥？嘿嘿，开发人员当编写一个新服务时，他们可以选择当前的技术。而且微服务嘛，由于服务较小，使用当前技术重写旧服务将变得更加可行，想想就刺激。</p>
+                <h3 id="h2_1_3_4"><a id="_58"></a>小结</h3>
+                <p>​
+                    看完了是不是觉得怪不得大家都在说微服务，优势明显，但其实构建微服务本质上是困难的，并不是所有的应用都是用于微服务，像一些简单的，轻量级的应用你使用微服务？可以，但其实没有很大的必要。微服务架构模式是复杂、持续发展应用的一个更好的选择，孰优孰劣，依旧要看具体情况。但是微服务还是要学的呀。</p>
+                <p>​ 好啦，本篇主要将微服务和单体应用之间进行了对比，彰显了微服务的优点。但是有优就有劣，以后会接着本篇谈谈微服务的劣势等。</p>
+                <p>​ ps：如果有小伙伴或者大佬觉得有错误的地方，可以纠正我，万分感谢~我是小白一个，嗯。至此，撒花~</p>
+            </div>
+            <!--标签-->
+            <div class="padded-lr-big-responsive margin-td-small">
+                <a class="ui basic teal left pointing label">SpringBoot</a>
+            </div>
+            <!--赞赏-->
+            <div class="ui center aligned basic segment">
+                <button id="blogPayButton" class="ui red basic circular button">赞赏</button>
+            </div>
+            <div class="ui flowing popup transition hidden" id="payQ">
+                <div class="ui red center aligned basic label">
+                    <div class="ui  centered aligned images" style="font-size: inherit">
+                        <div class="image">
+                            <img src="../../static/images/wechat.jpg" alt="" class="ui rounded bordered image"
+                                 style="width: 120px">
+                            <div>支付宝</div>
+                        </div>
+                        <div class="image">
+                            <img src="../../static/images/wechat.jpg" alt="" class="ui rounded bordered image"
+                                 style="width: 120px">
+                            <div>微信</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--内容信息-->
+        <div class="ui attached teal message">
+            <div class="ui middle aligned grid" style="margin-bottom: -1em;margin-top: -1em">
+                <div class="eleven wide column">
+                    <ui class="list">
+                        <li>作者：tyrant</li>
+                        <li>发表时间：2020-01-01 12：00</li>
+                        <li>版权声明：自由转载-非商用-非衍生-保持署名</li>
+                    </ui>
+                </div>
+                <div class="five wide column">
+                    <img src="../../static/images/wechat.jpg" alt="" class="ui rounded centered aligned bordered image"
+                         style="width: 100px">
+                </div>
+            </div>
+        </div>
+        <!--留言 -->
+        <div id="comment-container" class="ui bottom attached segment">
+            <div class="ui teal segment" style="padding-bottom: 0">
+                <div class="form">
+                    <div class="ui threaded comments">
+                        <h3 class="ui dividing header">Comments</h3>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="../../static/images/kobe.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">Matt</a>
+                                <div class="metadata">
+                                    <span class="date">今天下午 5:42</span>
+                                </div>
+                                <div class="text">太赞了！</div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="../../static/images/kobe.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">Elliot Fu</a>
+                                <div class="metadata">
+                                    <span class="date">昨天上午12:30</span>
+                                </div>
+                                <div class="text">
+                                    <p>這對我的研究是非常有用.謝謝!</p>
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                            <div class="comments">
+                                <div class="comment">
+                                    <a class="avatar">
+                                        <img src="../../static/images/kobe.jpg">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">Jenny Hess</a>
+                                        <div class="metadata">
+                                            <span class="date">刚刚</span>
+                                        </div>
+                                        <div class="text">艾略特你永远是多么正确 :)</div>
+                                        <div class="actions">
+                                            <a class="reply">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="../../static/images/kobe.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">Joe Henderson</a>
+                                <div class="metadata">
+                                    <span class="date">5 天以前</span>
+                                </div>
+                                <div class="text">老兄，这太棒了。非常感谢。</div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="comment-content" class="ui form">
+                        <div class="field">
+                            <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                        </div>
+                        <div class="fields">
+                            <div class="field m-mobile-wide m-mobile-margin-bottom">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="nickname" placeholder="姓名">
+                                </div>
+                            </div>
+                            <div class="field m-mobile-wide m-mobile-margin-bottom">
+                                <div class="ui left icon input">
+                                    <i class="mail icon"></i>
+                                    <input type="text" name="nickname" placeholder="邮箱">
+                                </div>
+                            </div>
+                            <div class="field m-mobile-wide m-mobile-margin-bottom">
+                                <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toolbar" class="ui vertical icon buttons" style="position: fixed;bottom: 0;right: 0;z-index: 2;display: none">
+    <button id="toc-button" href="#" class="ui teal button" type="button">目录</button>
+    <a href="#comment-content" class="ui teal button">留言</a>
+    <button id="wechatBolg-button" class="ui green icon button"><i class="weixin icon"></i></button>
+    <div id="to-Top-button" class="ui red button"><i class="arrow up icon"></i></a>
+    </div>
+    <div id="toc-container" class="ui flowing popup transition hidden" style="width: 160px">
+        <div class="js-toc">
+
+        </div>
+    </div>
+    <div id="wechatBlog" class="ui flowing popup transition hidden" style="width: 100px">
+        <!--<img src="./static/images/wechat.jpg" alt="" class="ui rounded image"
+             style="width: 100px">-->
+    </div>
+</div>
+<!--底部footer-->
+<footer class="ui inverted vertical segment">
+    <!--容器-->
+    <div class="ui center aligned container padded-td-massive">
+        <!--使用网格将其分开 stackable:响应手机端，可堆叠的-->
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/wechat.jpg" class="ui rounded image"
+                             style="width: 100px;" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header text-thin">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">我的博客创建了！</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header text-thin">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item"><i class="envelope icon"></i> wh961119@163.com</a>
+                    <a href="#" class="item"><i class="qq icon"></i> 674389994</a>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h4 class="ui inverted header text-thin">tyrant-profiteur</h4>
+                <div class="ui inverted link list">
+                    <p class="opacity-mini">大家好，我是暴君，或者叫我敛财者，嗯，很low的名字，这是我的个人博客，会分享一些自己觉得适合分享的东西，希望大家喜欢吧</p>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p style="opacity: 0.4;">©2020 tyrant-profiteur</p>
+    </div>
+    <!--定义背景-->
+    <div>
+        <canvas id="line" width="auto" height="auto"
+                style="position: fixed; top: 0px; left: 0px; z-index: 0;"></canvas>
+        <!--        <canvas id="Snow" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 99999;background: rgba(255,255,240,0.1);pointer-events: none;"></canvas>-->
+    </div>
+</footer>
+<!--线条-->
+<script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<!--雪花效果-->
+<!--<script src="https://files.cnblogs.com/files/cn-suqingnian/snow.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+
+<script src="../../static/lib/tocbot/tocbot.js"></script>
+<script src="../../static/lib/prism/prism.js"></script>
+<script src="../../static/lib/qrcode/qrcode.js"></script>
+<script src="../../static/lib/waypoints/jquery.waypoints.js"></script>
+<script>
+    tocbot.init({
+        tocSelector: '.js-toc',
+        contentSelector: '.js-toc-content',
+        headingSelector: 'h1, h2, h3',
+        hasInnerContainers: true,
+    });
+
+    $('#menu-toggle').click(function () {
+        $('.head-item').toggleClass('m-mobile-hide');
+    });
+    $('#blogPayButton').popup({
+        popup: $("#payQ.popup"),
+        on: 'click',
+        position: 'bottom center'
+    });
+
+    $('#toc-button').popup({
+        popup: $("#toc-container.popup"),
+        on: 'click',
+        position: 'left center'
+    });
+
+    $('#wechatBolg-button').popup({
+        popup: $("#wechatBlog.popup"),
+        on: 'click',
+        position: 'left center'
+    });
+
+    var qrcode = new QRCode("wechatBlog", {
+        text: "http://jindo.dev.naver.com/collie",
+        width: 80,
+        height: 80,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    $('#to-Top-button').click(function () {
+        $(window).scrollTo(0,600);
+    });
+
+    var waypoint = new Waypoint({
+        element: document.getElementById('blog-container'),
+        handler: function(direction) {
+            if (direction == 'down'){
+                $('#toolbar').show(500);
+            } else {
+                $('#toolbar').hide(200);
+            }
+            console.log('Scrolled to waypoint!')
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>博客管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!--引入自定义的style-->
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+<!--导航
+        引用ui里的元素 attached:没有圆角
+-->
+<nav class="ui inverted attached segment padded-td-mini m-shadow-small">
+    <div class="ui inverted container">
+        <div class="ui inverted stackable menu">
+            <h3 class="ui teal header item"><i class="cogs icon"></i>后台管理</h3>
+            <a href="#" class="active head-item item m-mobile-hide"><i class="mini home icon"></i>博客</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+            <div class="right m-mobile-hide head-item menu">
+                <div class="ui dropdown item">
+                    <dic class="text">
+                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">tyrant
+                    </dic>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui black button icon top-right m-mobile-show" id="menu-toggle">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" class="active teal item">列表</a>
+            <a href="#" class="item">发布</a></div>
+    </div>
+</div>
+<!--中间部位-->
+<div class="padded-td-massive blog-container">
+    <div class="ui container">
+        <form action="#" method="post" class="ui segment form">
+            <div class="inline fields">
+                <div class="field">
+                    <input type="text" class="text" name="title" placeholder="标题">
+                </div>
+                <div class="field">
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="type">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">分类</div>
+                        <div class="menu">
+                            <div class="item" data-value="1">错误日志</div>
+                            <div class="item" data-value="2">开发手册</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="recommend" id="recommend">
+                        <label for="recommend">推荐</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <button class="ui small teal basic button"><i class="search icon"></i>搜索</button>
+                </div>
+            </div>
+        </form>
+        <!--有个属性：celled 列之间添加网格-->
+        <table class="ui table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>标题</th>
+                <th>类型</th>
+                <th>推荐</th>
+                <th>更新时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>刻意练习清单</td>
+                <td>认知升级</td>
+                <td>是</td>
+                <td>2020-01-01 12:00</td>
+                <td>
+                    <a href="#" class="ui mini basic teal button">编辑</a>
+                    <a href="#" class="ui mini basic red button">删除</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr class="ui center aligned">
+                <th colspan="6">
+                    <div class="ui mini teal pagination menu">
+                        <a class="ui icon item">上一页</a>
+                        <a class="ui icon item">下一页</a>
+                    </div>
+                    <a href="#" class="ui mini right floated teal basic button">新增</a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<!--底部footer-->
+<footer class="ui inverted vertical segment">
+    <!--容器-->
+    <div class="ui center aligned container padded-td-massive">
+        <!--使用网格将其分开 stackable:响应手机端，可堆叠的-->
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/wechat.jpg" class="ui rounded image"
+                             style="width: 100px;" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header text-thin">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">我的博客创建了！</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header text-thin">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item"><i class="envelope icon"></i> wh961119@163.com</a>
+                    <a href="#" class="item"><i class="qq icon"></i> 674389994</a>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h4 class="ui inverted header text-thin">tyrant-profiteur</h4>
+                <div class="ui inverted link list">
+                    <p class="opacity-mini">大家好，我是暴君，或者叫我敛财者，嗯，很low的名字，这是我的个人博客，会分享一些自己觉得适合分享的东西，希望大家喜欢吧</p>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p style="opacity: 0.4;">©2020 tyrant-profiteur</p>
+    </div>
+    <!--定义背景-->
+    <div>
+        <canvas id="line" width="auto" height="auto"
+                style="position: fixed; top: 0px; left: 0px; z-index: 0;"></canvas>
+        <!--        <canvas id="Snow" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 99999;background: rgba(255,255,240,0.1);pointer-events: none;"></canvas>-->
+    </div>
+</footer>
+
+<!--线条-->
+<script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<!--雪花效果-->
+<!--<script src="https://files.cnblogs.com/files/cn-suqingnian/snow.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script>
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+    $('#menu-toggle').click(function () {
+        $('.head-item').toggleClass('m-mobile-hide');
+    });
+</script>
+</body>
+</html>
