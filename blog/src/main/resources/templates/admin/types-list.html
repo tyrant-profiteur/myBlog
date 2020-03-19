@@ -36,9 +36,31 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/types}" class="active teal item">列表</a>
+            <a href="#" th:href="@{/admin/types/edit}" class="item">分类新增</a></div>
+    </div>
+</div>
 <!--中间部位-->
 <div class="padded-td-massive blog-container">
     <div class="ui container">
+        <div class="ui three column grid">
+            <div class="ui column"></div>
+            <div class="ui column"></div>
+            <div class="ui column">
+                <div class="ui success mini message" th:unless="${#strings.isEmpty(success)}">
+                    <i class="close icon"></i>
+                    <p th:text="${success}"></p>
+                </div>
+                <div class="ui negative mini message" th:unless="${#strings.isEmpty(fail)}">
+                    <i class="close icon"></i>
+                    <p th:text="${fail}"></p>
+                </div>
+            </div>
+        </div>
+
         <!--有个属性：celled 列之间添加网格-->
         <table class="ui table">
             <thead>
@@ -53,17 +75,21 @@
                 <td th:text="${iterStat.count}">1</td>
                 <td th:text="${type.name}">刻意练习清单</td>
                 <td>
-                    <a href="#" th:href="@{/admin/types/{id}/edit(id=${type.id})}" class="ui mini basic teal button">编辑</a>
-                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini basic red button">删除</a>
+                    <a href="#" th:href="@{/admin/types/edit/{id}(id=${type.id})}"
+                       class="ui mini basic teal button">编辑</a>
+                    <a href="#" th:href="@{/admin/types/delete/{id}(id=${type.id})}"
+                       class="ui mini basic red button">删除</a>
                 </td>
             </tr>
             </tbody>
             <tfoot>
             <tr class="ui center aligned">
                 <th colspan="6">
-                    <div class="ui mini teal pagination menu"  th:if="${page.totalPages}>1">
-                        <a th:href="@{/admin/types(page=${page.number}-1)}" class="ui icon item" th:unless="${page.first}">上一页</a>
-                        <a th:href="@{/admin/types(page=${page.number}+1)}" class="ui icon item" th:unless="${page.last}">下一页</a>
+                    <div class="ui mini teal pagination menu" th:if="${page.totalPages}>1">
+                        <a th:href="@{/admin/types(page=${page.number}-1)}" class="ui icon item"
+                           th:unless="${page.first}">上一页</a>
+                        <a th:href="@{/admin/types(page=${page.number}+1)}" class="ui icon item"
+                           th:unless="${page.last}">下一页</a>
                     </div>
                     <a href="#" th:href="@{/admin/types/edit}" class="ui mini right floated teal basic button">新增</a>
                 </th>
@@ -131,6 +157,10 @@
     $('#menu-toggle').click(function () {
         $('.head-item').toggleClass('m-mobile-hide');
     });
+
+    $('.message .close').on('click',function () {
+        $(this).closest('.message').transition('fade');
+    })
 </script>
 </body>
 </html>

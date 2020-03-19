@@ -3,29 +3,26 @@
 <head th:replace="admin/_fragmentsadmin :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>分类新增</title>
+    <title>标签管理</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!--引入自定义的style-->
     <link rel="stylesheet" href="../../static/css/me.css">
-    <!--集成markdown-->
-    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.css">
 </head>
 <body>
 <!--导航
         引用ui里的元素 attached:没有圆角
 -->
-<nav class="ui inverted attached segment padded-td-mini m-shadow-small" th:replace="admin/_fragmentsadmin :: menu(2)">
+<nav class="ui inverted attached segment padded-td-mini m-shadow-small" th:replace="admin/_fragmentsadmin :: menu(3)">
     <div class="ui inverted container">
         <div class="ui inverted stackable menu">
             <h3 class="ui teal header item"><i class="cogs icon"></i>后台管理</h3>
             <a href="#" class="head-item item m-mobile-hide"><i class="mini home icon"></i>博客</a>
-            <a href="#" class="active head-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
-            <a href="#" class="head-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+            <a href="#" class="active head-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
             <div class="right m-mobile-hide head-item menu">
                 <div class="ui dropdown item">
                     <dic class="text">
-                        <img src="../../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}" alt=""
-                             class="ui avatar image">tyrant
+                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">tyrant
                     </dic>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -42,42 +39,65 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" th:href="@{/admin/types}" class="item">列表</a>
-            <a href="#" th:href="@{/admin/types/edit}" class="active teal item">分类新增</a></div>
+            <a href="#" th:href="@{/admin/tags}" class="active teal item">列表</a>
+            <a href="#" th:href="@{/admin/tags/edit}" class="item">标签新增</a></div>
     </div>
 </div>
 <!--中间部位-->
 <div class="padded-td-massive blog-container">
     <div class="ui container">
-        <form action="#" method="post" class="ui segment form" th:object="${type}" th:action="*{id}==null?@{/admin/types}:@{/admin/types/{id}(id=*{id})}">
-<!--            <input type="hidden" name="id" th:value="*{id}">-->
-            <div class="three fields" style="margin-bottom: 0px">
-                <div class="field">
-                    <div class="ui left labeled input">
-                        <label class="ui teal basic label">分类</label>
-                        <input type="text" name="name" placeholder="分类" th:value="*{name}">
-                    </div>
+        <div class="ui three column grid">
+            <div class="ui column"></div>
+            <div class="ui column"></div>
+            <div class="ui column">
+                <div class="ui success mini message" th:unless="${#strings.isEmpty(success)}">
+                    <i class="close icon"></i>
+                    <p th:text="${success}"></p>
                 </div>
-                <div class="field">
-                    <div class="ui error message" style="padding: 9px">
-                    </div>
-                    <!--/*/
-                    <div class="ui negative message" th:if="${#fields.hasErrors('name')}" style="margin:0;padding: 9px">
-                        <p th:errors="*{name}" style="margin: 0"></p>
-                        </div>
-                    /*/-->
-                </div>
-                <div class="field">
-                    <div class="right aligned column">
-                        <button type="button" class="ui teal right  button" onclick="window.history.go(-1)">返回</button>
-                        <button class="ui olive right  button">提交</button>
-                    </div>
+                <div class="ui negative mini message" th:unless="${#strings.isEmpty(fail)}">
+                    <i class="close icon"></i>
+                    <p th:text="${fail}"></p>
                 </div>
             </div>
-        </form>
+        </div>
+
+        <!--有个属性：celled 列之间添加网格-->
+        <table class="ui table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tag,iterStat : ${page.content}">
+                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${tag.name}">刻意练习清单</td>
+                <td>
+                    <a href="#" th:href="@{/admin/tags/edit/{id}(id=${tag.id})}"
+                       class="ui mini basic teal button">编辑</a>
+                    <a href="#" th:href="@{/admin/tags/delete/{id}(id=${tag.id})}"
+                       class="ui mini basic red button">删除</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr class="ui center aligned">
+                <th colspan="6">
+                    <div class="ui mini teal pagination menu" th:if="${page.totalPages}>1">
+                        <a th:href="@{/admin/tags(page=${page.number}-1)}" class="ui icon item"
+                           th:unless="${page.first}">上一页</a>
+                        <a th:href="@{/admin/tags(page=${page.number}+1)}" class="ui icon item"
+                           th:unless="${page.last}">下一页</a>
+                    </div>
+                    <a href="#" th:href="@{/admin/tags/edit}" class="ui mini right floated teal basic button">新增</a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
-
 
 <!--底部footer-->
 <footer class="ui inverted vertical segment" th:replace="admin/_fragmentsadmin :: footer">
@@ -88,8 +108,7 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}"
-                             class="ui rounded image"
+                        <img src="../../static/images/wechat.jpg" class="ui rounded image"
                              style="width: 100px;" alt="">
                     </div>
                 </div>
@@ -125,29 +144,18 @@
     </div>
 </footer>
 
-
 <!--/*/<th:block th:replace="admin/_fragmentsadmin :: basicScript">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 <!--/*/</th:block>/*/-->
 <script>
-    $('.ui.dropdown').dropdown();
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
 
     $('#menu-toggle').click(function () {
         $('.head-item').toggleClass('m-mobile-hide');
-    });
-
-    $('.ui.form').form({
-        fields: {
-            name: {
-                identifier: "name",
-                rules: [{
-                    type: "empty",
-                    prompt: "请输入名称！"
-                }]
-            }
-        }
     });
 
     $('.message .close').on('click',function () {

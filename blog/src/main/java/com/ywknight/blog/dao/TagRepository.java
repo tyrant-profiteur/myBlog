@@ -1,9 +1,10 @@
 package com.ywknight.blog.dao;
 
+import com.ywknight.blog.po.Tag;
 import com.ywknight.blog.po.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TypeRepository extends JpaRepository<Type, Long> {
+public interface TagRepository extends JpaRepository<Tag, Long> {
     //根据名字查找分类
-    Type findByName(String name);
+    Tag findByName(String name);
 }
