@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:replace="front/_fragmentsfront :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>博客详情</title>
@@ -20,15 +20,15 @@
 <!--导航
         引用ui里的元素 attached:没有圆角
 -->
-<nav class="ui inverted attached segment padded-td-mini m-shadow-small">
+<nav class="ui inverted attached segment padded-td-mini m-shadow-small" th:replace="front/_fragmentsfront :: menu(1)">
     <div class="ui inverted container">
         <div class="ui inverted stackable menu">
             <h3 class="ui teal header item"><i class="book icon"></i>Tyrant</h3>
             <a href="#" class="head-item item m-mobile-hide"><i class="mini home icon"></i> 首页</a>
-            <a href="#" class="head-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
-            <a href="#" class="head-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
-            <a href="#" class="head-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>
-            <a href="#" class="head-item item m-mobile-hide"><i class="mini info icon"></i>关于我</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini idea icon"></i> 分类</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini tags icon"></i> 标签</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini clone icon"></i> 归档</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini info icon"></i> 关于我</a>
             <div class="head-item m-mobile-hide right item">
                 <div class="ui icon input focus inverted">
                     <input type="text" placeholder="Search...">
@@ -289,7 +289,7 @@
     </div>
 </div>
 <!--底部footer-->
-<footer class="ui inverted vertical segment">
+<footer class="ui inverted vertical segment" th:replace="front/_fragmentsfront :: footer">
     <!--容器-->
     <div class="ui center aligned container padded-td-massive">
         <!--使用网格将其分开 stackable:响应手机端，可堆叠的-->
@@ -332,18 +332,18 @@
         <!--        <canvas id="Snow" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 99999;background: rgba(255,255,240,0.1);pointer-events: none;"></canvas>-->
     </div>
 </footer>
-<!--线条-->
-<script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-<!--雪花效果-->
-<!--<script src="https://files.cnblogs.com/files/cn-suqingnian/snow.js"></script>-->
+
+<!--/*/<th:block th:replace="front/_fragmentsfront :: basicScript">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<!--/*/</th:block>/*/-->
 
-<script src="../../static/lib/tocbot/tocbot.js"></script>
-<script src="../../static/lib/prism/prism.js"></script>
-<script src="../../static/lib/qrcode/qrcode.js"></script>
-<script src="../../static/lib/waypoints/jquery.waypoints.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<script src="../../static/lib/tocbot/tocbot.js" th:src="@{/lib/tocbot/tocbot.js}"></script>
+<script src="../../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+<script src="../../static/lib/qrcode/qrcode.js" th:src="@{/lib/qrcode/qrcode.js}"></script>
+<script src="../../static/lib/waypoints/jquery.waypoints.js" th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
 <script>
     tocbot.init({
         tocSelector: '.js-toc',

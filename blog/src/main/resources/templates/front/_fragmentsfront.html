@@ -1,33 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>404</title>
+    <title th:replace="${title}"></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!--引入自定义的style-->
     <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+    <!--markdown样式插件-->
+    <link rel="stylesheet" href="../../static/css/typo.css" th:href="@{/css/typo.css}">
+    <!--动态效果插件-->
+    <link rel="stylesheet" href="../../static/css/animate.css" th:href="@{/css/animate.css}">
+    <!--代码高亮插件-->
+    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/prism/prism.css}">
+    <!--目录生成-->
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/tocbot/tocbot.css}">
 </head>
 <body>
+
 <!--导航
         引用ui里的元素 attached:没有圆角
 -->
-<nav class="ui inverted attached segment padded-td-mini m-shadow-small">
+<nav th:fragment="menu(n)" class="ui inverted attached segment padded-td-mini m-shadow-small">
     <div class="ui inverted container">
         <div class="ui inverted stackable menu">
-            <h3 class="ui teal header item"><i class="cogs icon"></i>后台管理</h3>
-            <a href="#" class="active head-item item m-mobile-hide"><i class="mini home icon"></i>博客</a>
-            <a href="#" class="head-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
-            <a href="#" class="head-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
-            <div class="right m-mobile-hide head-item menu">
-                <div class="ui dropdown item">
-                    <dic class="text">
-                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image" th:src="@{/images/kobe.jpg}">tyrant
-                    </dic>
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                        <a href="#" class="item">注销</a>
-                    </div>
+            <h3 class="ui teal header item"><i class="book icon"></i>Tyrant</h3>
+            <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i> 首页</a>
+            <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
+            <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>标签</a>
+            <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>归档</a>
+            <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="mini info icon"></i>关于我</a>
+            <div class="head-item m-mobile-hide right item">
+                <div class="ui icon input focus inverted">
+                    <input type="text" placeholder="Search...">
+                    <i class="search icon"></i>
                 </div>
             </div>
         </div>
@@ -37,16 +43,8 @@
     </a>
 </nav>
 
-<div class="blog-container padded-td-massive">
-    <div class="ui error message padded-td-massive">
-        <div class="ui container">
-            <h2>404</h2>
-            <p>对不起，你访问的资源不存在</p>
-        </div>
-    </div>
-</div>
 <!--底部footer-->
-<footer class="ui inverted vertical segment">
+<footer th:fragment="footer" class="ui inverted vertical segment">
     <!--容器-->
     <div class="ui center aligned container padded-td-massive">
         <!--使用网格将其分开 stackable:响应手机端，可堆叠的-->
@@ -90,11 +88,14 @@
     </div>
 </footer>
 
-<!--线条-->
-<script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-<!--雪花效果-->
-<!--<script src="https://files.cnblogs.com/files/cn-suqingnian/snow.js"></script>-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<th:block th:fragment="basicScript">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <!--semanticui-->
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!--线条-->
+    <script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+    <!--雪花效果-->
+    <!--<script src="https://files.cnblogs.com/files/cn-suqingnian/snow.js"></script>-->
+</th:block>
 </body>
 </html>

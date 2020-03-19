@@ -19,3 +19,6 @@ logging:
   file:
     name: blog-dev.log
     path: ../blog/
+
+server:
+  port: 8090

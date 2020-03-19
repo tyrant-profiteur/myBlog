@@ -18,7 +18,7 @@ public class LogAspect {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /*只要是web下面的请求都会经过这个切面控制器*/
-    @Pointcut("execution(* com.ywknight.blog.web.*.*(..))")
+    @Pointcut("execution(* com.ywknight.blog.controller.*.*(..))")
     public void log(){
     }
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="_fragmentsfront :: head(~{::title})">
+<head th:replace="front/_fragmentsfront :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>首页</title>
@@ -10,7 +10,7 @@
     </head>
 <body>
 <!--导航-->
-<nav th:replace="_fragmentsfront :: menu(1)" class="ui inverted attached segment padded-td-mini m-shadow-small">
+<nav th:replace="front/_fragmentsfront :: menu(1)" class="ui inverted attached segment padded-td-mini m-shadow-small">
     <div class="ui inverted container">
         <div class="ui inverted stackable menu">
             <h3 class="ui teal header item"><i class="book icon"></i>Tyrant</h3>
@@ -378,7 +378,7 @@
 </div>
 
 <!--底部footer-->
-<footer th:replace="_fragmentsfront :: footer" class="ui inverted vertical segment">
+<footer th:replace="front/_fragmentsfront :: footer" class="ui inverted vertical segment">
     <!--容器-->
     <div class="ui center aligned container padded-td-massive">
         <!--使用网格将其分开 stackable:响应手机端，可堆叠的-->
@@ -424,14 +424,10 @@
 
 <!--引用公用script-->
 <!--下面的写法：再html下是注解，但是在thymeleaf是生效的-->
-<!--/*/<th:block th:replace="_fragmentsfront :: basicScript">/*/-->
+<!--/*/<th:block th:replace="front/_fragmentsfront :: basicScript">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<!--semanticui-->
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<!--线条-->
 <script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-<!--雪花效果-->
-<!--<script src="https://files.cnblogs.com/files/cn-suqingnian/snow.js"></script>-->
 <!--/*/</th:block>/*/-->
 
 <script>
