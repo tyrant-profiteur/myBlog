@@ -1,5 +1,0 @@
-2020-03-18 14:54:17.348  INFO 14132 --- [restartedMain] com.ywknight.blog.BlogApplication        : Starting BlogApplication on WH with PID 14132 (E:\Java\new_Java_Study\myBlog\blog\target\classes started by tyrant in E:\Java\new_Java_Study\myBlog\blog)
-2020-03-18 14:54:17.352  INFO 14132 --- [restartedMain] com.ywknight.blog.BlogApplication        : The following profiles are active: pro
-2020-03-18 14:54:19.640  WARN 14132 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2020-03-18 14:54:19.878  WARN 14132 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2020-03-18 14:54:20.012  INFO 14132 --- [restartedMain] com.ywknight.blog.BlogApplication        : Started BlogApplication in 3.287 seconds (JVM running for 4.635)
