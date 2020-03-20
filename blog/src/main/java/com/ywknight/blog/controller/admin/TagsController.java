@@ -62,6 +62,7 @@ public class TagsController {
         return "redirect:/admin/tags";
     }
 
+
     @PostMapping("/{id}")
     public String edit(@Valid Tag tag, BindingResult result,@PathVariable Long id,RedirectAttributes redirectAttributes){
         //重复数据校验

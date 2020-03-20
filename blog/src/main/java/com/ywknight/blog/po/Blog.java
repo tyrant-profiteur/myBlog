@@ -2,6 +2,8 @@ package com.ywknight.blog.po;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,9 @@ public class Blog {
     private Long id;
 
     private String title;
+
+//    @Basic(fetch = FetchType.LAZY) --懒加载
+//    @Lob  --大数据类型
     private String content;
     private String firstPicture;
     private String flag;
@@ -31,6 +36,7 @@ public class Blog {
 
     /*构建类之间的关系*/
     @ManyToOne
+    @NotNull(message = "标签名称不能为空！")
     private Type type;
     //级联新增：当增加一个blog时，如果有新的tags，也会保存进去
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -40,6 +46,8 @@ public class Blog {
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
 
+    @Transient
+    private String tagIds;
 
     public Blog() {
     }
@@ -178,6 +186,14 @@ public class Blog {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
     }
 
     @Override

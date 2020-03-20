@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface TypeService {
 
@@ -15,6 +17,8 @@ public interface TypeService {
     Type getTypeByName(String name);
 
     Page<Type> listType(Pageable pageable);
+
+    List<Type> getTypeList();
 
     Type updateType(Long id,Type type);
 
