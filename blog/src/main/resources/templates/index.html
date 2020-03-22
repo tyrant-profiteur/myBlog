@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!--引入自定义的style-->
     <link rel="stylesheet" href="../static/css/me.css">
-    </head>
+</head>
 <body>
 <!--导航-->
 <nav th:replace="front/_fragmentsfront :: menu(1)" class="ui inverted attached segment padded-td-mini m-shadow-small">
@@ -38,7 +38,7 @@
 </nav>
 
 <!--中间部位-->
-<div class="padded-td-massive blog-container">
+<div class="padded-td-massive">
     <div class="ui container">
         <div class="ui stackable grid">
             <!--左边整体-->
@@ -51,214 +51,239 @@
                         </div>
                         <!--aligned:对齐-->
                         <div class="column right aligned">
-                            共<h2 class="ui olive header inline-block"> 14 </h2>篇
+                            共<h2 class="ui olive header inline-block" th:text="${page.totalElements}"> 14 </h2>篇
                         </div>
                     </div>
                 </div>
                 <!--左边列表-->
-                <div class="ui attached segment">
-                    <div class="ui padded vertical segment padded-td-large">
-                        <div class="ui mobile reversed stackable grid">
-                            <div class="eleven wide column">
-                                <h3 class="text-spaced">你真的理解财富自由吗？</h3>
-                                <p class="text-spaced">
-                                    在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                                <div class="ui  stackable grid">
-                                    <div class="twelve wide column">
-                                        <div class="ui horizontal small link list">
-                                            <div class="item">
-                                                <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}" alt=""
-                                                     class="ui avatar image">
-                                                <div class="content">
-                                                    <div class="header text-thin">tyrant</div>
+                <div id="blog-container" class="ui attached segment">
+                    <div th:fragment="blogList">
+                        <div class="ui padded vertical segment padded-td-large" th:each="blog : ${page.content}">
+                            <div class="ui middle aligned mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="text-spaced">
+                                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}"
+                                           target="_blank" class="font-black"
+                                           th:text="${blog.title}"></a>
+                                    </h3>
+                                    <p class="text-spaced"
+                                       th:text="${blog.description}!=null?|${blog.description}......|">
+                                        在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                                    <div class="ui  stackable grid">
+                                        <div class="twelve wide column">
+                                            <div class="ui horizontal small link list">
+                                                <div class="item">
+                                                    <img src="../static/images/kobe.jpg"
+                                                         th:src="@{${blog.user}==null?'/images/kobe.jpg':${blog.user.avatar}}"
+                                                         alt=""
+                                                         class="ui avatar image">
+                                                    <div class="content">
+                                                        <div class="header text-thin"
+                                                             th:text="${blog.user}==null?'游客':${blog.user.nickname}">
+                                                            tyrant
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i><span
+                                                        th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-01-01</span>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i><span th:text="${blog.views}">123</span>
                                                 </div>
                                             </div>
-                                            <div class="item">
-                                                <i class="calendar icon"></i>2020-01-01
-                                            </div>
-                                            <div class="item">
-                                                <i class="eye icon"></i>123
-                                            </div>
+                                        </div>
+                                        <div class="four wide column">
+                                            <a href="#" target="_blank"
+                                               class="ui basic teal label padded-mini text-thin"
+                                               th:text="${blog.type.name}">认知升级</a>
                                         </div>
                                     </div>
-                                    <div class="four wide column">
-                                        <a href="#" target="_blank"
-                                           class="ui basic teal label padded-mini text-thin">认知升级</a>
-                                    </div>
+                                </div>
+                                <div class="five wide column">
+                                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                        <img src="../static/images/kobe.jpg" alt=""
+                                             th:src="@{${blog.firstPicture}==null?'/images/kobe.jpg':${blog.firstPicture}}"
+                                             class="ui center aligned rounded image picture-size">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank">
-                                    <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
-                                         class="ui center aligned rounded image picture-size">
-                                </a>
-                            </div>
                         </div>
-                    </div>
-                    <div class="ui padded vertical segment padded-td-large">
-                        <div class="ui mobile reversed stackable grid">
-                            <div class="eleven wide column">
-                                <h3 class="text-spaced">你真的理解财富自由吗？</h3>
-                                <p class="text-spaced">
-                                    在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                                <div class="ui  stackable grid">
-                                    <div class="twelve wide column">
-                                        <div class="ui horizontal small link list">
-                                            <div class="item">
-                                                <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}" alt=""
-                                                     class="ui avatar image">
-                                                <div class="content">
-                                                    <div class="header text-thin">tyrant</div>
+                        <!--/*-->
+                        <div class="ui padded vertical segment padded-td-large">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="text-spaced">你真的理解财富自由吗？</h3>
+                                    <p class="text-spaced">
+                                        在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                                    <div class="ui  stackable grid">
+                                        <div class="twelve wide column">
+                                            <div class="ui horizontal small link list">
+                                                <div class="item">
+                                                    <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}"
+                                                         alt=""
+                                                         class="ui avatar image">
+                                                    <div class="content">
+                                                        <div class="header text-thin">tyrant</div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i>2020-01-01
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i>123
                                                 </div>
                                             </div>
-                                            <div class="item">
-                                                <i class="calendar icon"></i>2020-01-01
-                                            </div>
-                                            <div class="item">
-                                                <i class="eye icon"></i>123
-                                            </div>
+                                        </div>
+                                        <div class="four wide column">
+                                            <a href="#" target="_blank"
+                                               class="ui basic teal label padded-mini text-thin">认知升级</a>
                                         </div>
                                     </div>
-                                    <div class="four wide column">
-                                        <a href="#" target="_blank"
-                                           class="ui basic teal label padded-mini text-thin">认知升级</a>
-                                    </div>
+                                </div>
+                                <div class="five wide column">
+                                    <a href="#" target="_blank">
+                                        <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
+                                             class="ui center aligned rounded image picture-size">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank">
-                                    <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
-                                         class="ui center aligned rounded image picture-size">
-                                </a>
-                            </div>
                         </div>
-                    </div>
-                    <div class="ui padded vertical segment padded-td-large">
-                        <div class="ui mobile reversed stackable grid">
-                            <div class="eleven wide column">
-                                <h3 class="text-spaced">你真的理解财富自由吗？</h3>
-                                <p class="text-spaced">
-                                    在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                                <div class="ui  stackable grid">
-                                    <div class="twelve wide column">
-                                        <div class="ui horizontal small link list">
-                                            <div class="item">
-                                                <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}" alt=""
-                                                     class="ui avatar image">
-                                                <div class="content">
-                                                    <div class="header text-thin">tyrant</div>
+                        <div class="ui padded vertical segment padded-td-large">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="text-spaced">你真的理解财富自由吗？</h3>
+                                    <p class="text-spaced">
+                                        在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                                    <div class="ui  stackable grid">
+                                        <div class="twelve wide column">
+                                            <div class="ui horizontal small link list">
+                                                <div class="item">
+                                                    <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}"
+                                                         alt=""
+                                                         class="ui avatar image">
+                                                    <div class="content">
+                                                        <div class="header text-thin">tyrant</div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i>2020-01-01
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i>123
                                                 </div>
                                             </div>
-                                            <div class="item">
-                                                <i class="calendar icon"></i>2020-01-01
-                                            </div>
-                                            <div class="item">
-                                                <i class="eye icon"></i>123
-                                            </div>
+                                        </div>
+                                        <div class="four wide column">
+                                            <a href="#" target="_blank"
+                                               class="ui basic teal label padded-mini text-thin">认知升级</a>
                                         </div>
                                     </div>
-                                    <div class="four wide column">
-                                        <a href="#" target="_blank"
-                                           class="ui basic teal label padded-mini text-thin">认知升级</a>
-                                    </div>
+                                </div>
+                                <div class="five wide column">
+                                    <a href="#" target="_blank">
+                                        <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
+                                             class="ui center aligned rounded image picture-size">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank">
-                                    <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
-                                         class="ui center aligned rounded image picture-size">
-                                </a>
-                            </div>
                         </div>
-                    </div>
-                    <div class="ui padded vertical segment padded-td-large">
-                        <div class="ui mobile reversed stackable grid">
-                            <div class="eleven wide column">
-                                <h3 class="text-spaced">你真的理解财富自由吗？</h3>
-                                <p class="text-spaced">
-                                    在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                                <div class="ui  stackable grid">
-                                    <div class="twelve wide column">
-                                        <div class="ui horizontal small link list">
-                                            <div class="item">
-                                                <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}" alt=""
-                                                     class="ui avatar image">
-                                                <div class="content">
-                                                    <div class="header text-thin">tyrant</div>
+                        <div class="ui padded vertical segment padded-td-large">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="text-spaced">你真的理解财富自由吗？</h3>
+                                    <p class="text-spaced">
+                                        在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                                    <div class="ui  stackable grid">
+                                        <div class="twelve wide column">
+                                            <div class="ui horizontal small link list">
+                                                <div class="item">
+                                                    <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}"
+                                                         alt=""
+                                                         class="ui avatar image">
+                                                    <div class="content">
+                                                        <div class="header text-thin">tyrant</div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i>2020-01-01
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i>123
                                                 </div>
                                             </div>
-                                            <div class="item">
-                                                <i class="calendar icon"></i>2020-01-01
-                                            </div>
-                                            <div class="item">
-                                                <i class="eye icon"></i>123
-                                            </div>
+                                        </div>
+                                        <div class="four wide column">
+                                            <a href="#" target="_blank"
+                                               class="ui basic teal label padded-mini text-thin">认知升级</a>
                                         </div>
                                     </div>
-                                    <div class="four wide column">
-                                        <a href="#" target="_blank"
-                                           class="ui basic teal label padded-mini text-thin">认知升级</a>
-                                    </div>
+                                </div>
+                                <div class="five wide column">
+                                    <a href="#" target="_blank">
+                                        <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
+                                             class="ui center aligned rounded image picture-size">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank">
-                                    <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
-                                         class="ui center aligned rounded image picture-size">
-                                </a>
-                            </div>
                         </div>
-                    </div>
-                    <div class="ui padded vertical segment padded-td-large">
-                        <div class="ui mobile reversed stackable grid">
-                            <div class="eleven wide column">
-                                <h3 class="text-spaced">你真的理解财富自由吗？</h3>
-                                <p class="text-spaced">
-                                    在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                                <div class="ui  stackable grid">
-                                    <div class="twelve wide column">
-                                        <div class="ui horizontal small link list">
-                                            <div class="item">
-                                                <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}" alt=""
-                                                     class="ui avatar image">
-                                                <div class="content">
-                                                    <div class="header text-thin">tyrant</div>
+                        <div class="ui padded vertical segment padded-td-large">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="text-spaced">你真的理解财富自由吗？</h3>
+                                    <p class="text-spaced">
+                                        在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                                    <div class="ui  stackable grid">
+                                        <div class="twelve wide column">
+                                            <div class="ui horizontal small link list">
+                                                <div class="item">
+                                                    <img src="../static/images/kobe.jpg" th:src="@{/images/kobe.jpg}"
+                                                         alt=""
+                                                         class="ui avatar image">
+                                                    <div class="content">
+                                                        <div class="header text-thin">tyrant</div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i>2020-01-01
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i>123
                                                 </div>
                                             </div>
-                                            <div class="item">
-                                                <i class="calendar icon"></i>2020-01-01
-                                            </div>
-                                            <div class="item">
-                                                <i class="eye icon"></i>123
-                                            </div>
+                                        </div>
+                                        <div class="four wide column">
+                                            <a href="#" target="_blank"
+                                               class="ui basic teal label padded-mini text-thin">认知升级</a>
                                         </div>
                                     </div>
-                                    <div class="four wide column">
-                                        <a href="#" target="_blank"
-                                           class="ui basic teal label padded-mini text-thin">认知升级</a>
-                                    </div>
+                                </div>
+                                <div class="five wide column">
+                                    <a href="#" target="_blank">
+                                        <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
+                                             class="ui center aligned rounded image picture-size">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank">
-                                    <img src="../static/images/kobe.jpg" alt="" th:src="@{/images/kobe.jpg}"
-                                         class="ui center aligned rounded image picture-size">
-                                </a>
-                            </div>
                         </div>
+                        <!--*/-->
                     </div>
                 </div>
                 <!--左边底部-->
-                <div class="ui attached segment">
-                    <div class="ui middle aligned two column grid">
+
+                <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+                    <input type="hidden" name="page">
+                    <div class="ui middle aligned three column grid">
                         <div class="column">
-                            <button class="ui teal labeled icon button" rel="#"><i class="left arrow icon"></i> 上一页
-                            </button>
+                            <a onclick="page(this)" th:attr="data-page=${page.number}-1"
+                               class="ui mini teal basic button">上一页</a>
                         </div>
-                        <div class="column right aligned">
-                            <button class="ui teal right labeled icon button" rel="#"><i class="right arrow icon"></i>
-                                下一页
-                            </button>
+                        <div class="center aligned column">
+                            <!--                            <p th:text="${page.number}"></p>-->
+                        </div>
+                        <div class="right aligned column">
+                            <a onclick="page(this)" th:attr="data-page=${page.number}+1"
+                               class="ui mini teal basic button">下一页</a>
                         </div>
                     </div>
                 </div>
@@ -279,6 +304,13 @@
                     </div>
                     <div class="ui teal segment">
                         <div class="ui fluid vertical menu">
+                            <a href="#" class="item" target="_blank" th:each="type : ${types}">
+                                <span th:text="${type.name}">学习日志</span>
+                                <div class="ui basic teal left pointing label" th:text="${#arrays.length(type.blogs)}">
+                                    13
+                                </div>
+                            </a>
+                            <!--/*-->
                             <a href="#" class="item" target="_blank">
                                 学习日志
                                 <div class="ui basic teal left pointing label">13</div>
@@ -295,10 +327,7 @@
                                 学习日志
                                 <div class="ui basic teal left pointing label">13</div>
                             </a>
-                            <a href="#" class="item" target="_blank">
-                                学习日志
-                                <div class="ui basic teal left pointing label">13</div>
-                            </a>
+                            <!--*/-->
                         </div>
                     </div>
                 </div>
@@ -316,9 +345,12 @@
                     </div>
                     <div class="ui teal segment">
                         <div class="column">
-                            <a href="#" class="ui basic teal left pointing label margin-td-mini">基础
-                                <div class="detail">23</div>
+                            <a href="#" class="ui basic teal left pointing label margin-td-mini"
+                               th:each="tag : ${tags}">
+                                <span th:text="${tag.name}">基础</span>
+                                <div class="detail" th:text="${#arrays.length(tag.name)}">23</div>
                             </a>
+                            <!--/*-->
                             <a href="#" class="ui basic teal left pointing label margin-td-mini">Web
                                 <div class="detail">23</div>
                             </a>
@@ -340,6 +372,7 @@
                             <a href="#" class="ui basic teal left pointing label margin-td-mini">SpringBoot
                                 <div class="detail">23</div>
                             </a>
+                            <!--*/-->
                         </div>
                     </div>
                 </div>
@@ -350,9 +383,11 @@
                             <i class="bookmark icon"></i>最新推荐
                         </div>
                     </div>
-                    <div class="ui teal segment">
-                        <a href="#" target="_blank" class="font-black text-fat text-spaced">用户故事</a>
+                    <div class="ui segment" th:each="blog : ${recommendBlogs}">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                           class="font-black text-fat text-spaced" th:text="${blog.title}">用户故事</a>
                     </div>
+                    <!--/*-->
                     <div class="ui segment">
                         <a href="#" target="_blank" class="font-black text-fat text-spaced">用户故事</a>
                     </div>
@@ -365,6 +400,7 @@
                     <div class="ui segment">
                         <a href="#" target="_blank" class="font-black text-fat text-spaced">用户故事</a>
                     </div>
+                    <!--*/-->
                 </div>
                 <!--二维码-->
                 <h4 class="ui horizontal divider header">扫码加好友</h4>
@@ -434,6 +470,18 @@
     $('#menu-toggle').click(function () {
         $('.head-item').toggleClass('m-mobile-hide');
     });
+
+    function page(obj) {
+        $("[name='page']").val($(obj).data("page"));
+        loaddata();
+        $("body,html").animate({scrollTop:0},500)
+    }
+
+    function loaddata() {
+        $('#blog-container').load("/indexblog", {
+            page: $("[name='page']").val()
+        });
+    }
 </script>
 </body>
 </html>

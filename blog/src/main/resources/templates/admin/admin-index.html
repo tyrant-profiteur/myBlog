@@ -12,11 +12,11 @@
 <!--导航
         引用ui里的元素 attached:没有圆角
 -->
-<nav th:class="ui inverted attached segment padded-td-mini m-shadow-small" th:replace="admin/_fragmentsadmin :: menu(1)">
+<nav th:class="ui inverted attached segment padded-td-mini m-shadow-small" th:replace="admin/_fragmentsadmin :: menu(0)">
     <div class="ui inverted container">
         <div class="ui inverted stackable menu">
             <h3 class="ui teal header item"><i class="cogs icon"></i>后台管理</h3>
-            <a href="#" class="active head-item item m-mobile-hide"><i class="mini home icon"></i>博客</a>
+            <a href="#" class="head-item item m-mobile-hide"><i class="mini home icon"></i>博客</a>
             <a href="#" class="head-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
             <a href="#" class="head-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
             <div class="right m-mobile-hide head-item menu">

@@ -1,7 +1,5 @@
 package com.ywknight.blog.vo;
 
-import com.ywknight.blog.po.Blog;
-
 public class BlogQuery{
 
     private String title;

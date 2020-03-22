@@ -12,9 +12,9 @@
     <!--动态效果插件-->
     <link rel="stylesheet" href="../../static/css/animate.css" th:href="@{/css/animate.css}">
     <!--代码高亮插件-->
-    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/prism/prism.css}">
+    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
     <!--目录生成-->
-    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{lib/tocbot/tocbot.css}">
 </head>
 <body>
 
@@ -25,16 +25,18 @@
     <div class="ui inverted container">
         <div class="ui inverted stackable menu">
             <h3 class="ui teal header item"><i class="book icon"></i>Tyrant</h3>
-            <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i> 首页</a>
+            <a href="#" th:href="@{/}" class="head-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i> 首页</a>
             <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
             <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>标签</a>
             <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>归档</a>
             <a href="#" class="head-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="mini info icon"></i>关于我</a>
             <div class="head-item m-mobile-hide right item">
-                <div class="ui icon input focus inverted">
-                    <input type="text" placeholder="Search...">
-                    <i class="search icon"></i>
-                </div>
+                <form name="search" action="#" th:action="@{/search}" method="post">
+                    <div class="ui icon inverted transparent input m-margin-tb-tiny">
+                        <input type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -83,7 +85,7 @@
     <!--定义背景-->
     <div>
         <canvas id="line" width="auto" height="auto"
-                style="position: fixed; top: 0px; left: 0px; z-index: 0;"></canvas>
+                style="position: fixed; top: 0px; left: 0px; z-index: -333;"></canvas>
         <!--        <canvas id="Snow" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 99999;background: rgba(255,255,240,0.1);pointer-events: none;"></canvas>-->
     </div>
 </footer>
@@ -96,6 +98,36 @@
     <script src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
     <!--雪花效果-->
     <!--<script src="https://files.cnblogs.com/files/cn-suqingnian/snow.js"></script>-->
+    <script type="text/javascript">
+        /* 鼠标特效 */
+        var a_idx = 0;
+        jQuery(document).ready(function($) {
+            $("body").click(function(e) {
+                var a = new Array("♢","♟","❦","☁","♭","➽","➲","™","☺","〠","〆","〄","ܜ","εїз","◈","☘","▣","♞","✲","♤","♙","♗","♖","☿","♕","♞","✯","♣","❤","♪","❆","➼","↯","★","↭","☀","✦","✲","❣","↬","★","✤","✲","☾","♬");
+                var $i = $("<span></span>").text(a[a_idx]);
+                a_idx = (a_idx + 1) % a.length;
+                var x = e.pageX,
+                    y = e.pageY;
+                $i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-size": "2.1rem",
+                    "color": "rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"
+                });
+                $("body").append($i);
+                $i.animate({
+                        "top": y - 180,
+                        "opacity": 0
+                    },
+                    1500,
+                    function() {
+                        $i.remove();
+                    });
+            });
+        });
+    </script>
 </th:block>
 </body>
 </html>
