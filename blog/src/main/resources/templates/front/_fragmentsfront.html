@@ -14,7 +14,7 @@
     <!--代码高亮插件-->
     <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
     <!--目录生成-->
-    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
 </head>
 <body>
 
@@ -42,6 +42,8 @@
                         <i onclick="document.forms['search'].submit()" class="search link icon"></i>
                     </div>
                 </form>
+                <a href="#" th:href="@{/admin}" class="head-item item m-mobile-hide"><i
+                        class="mini user icon"></i>登录</a>
             </div>
         </div>
     </div>
@@ -56,6 +58,7 @@
     <div class="ui center aligned container padded-td-massive">
         <!--使用网格将其分开 stackable:响应手机端，可堆叠的-->
         <div class="ui inverted divided stackable grid">
+            <div class="two wide column"></div>
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
@@ -65,19 +68,19 @@
                     </div>
                 </div>
             </div>
-            <div class="four wide column">
+            <!--<div class="four wide column">
                 <h4 class="ui inverted header text-thin">最新博客</h4>
                 <div id="newblog-container">
                     <div class="ui inverted link list" th:fragment="newblogList">
                         <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin"
                            th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事（User Story）</a>
-                        <!--/*-->
+                        &lt;!&ndash;/*&ndash;&gt;
                         <a href="#" class="item m-text-thin">用户故事（User Story）</a>
                         <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-                        <!--*/-->
+                        &lt;!&ndash;*/&ndash;&gt;
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="four wide column">
                 <h4 class="ui inverted header text-thin">联系我</h4>
                 <div class="ui inverted link list">
@@ -91,6 +94,7 @@
                     <p class="opacity-mini">大家好，我是暴君，或者叫我敛者，嗯，很low的名字，这是我的个人博客，会分享一些自己觉得适合分享的东西，希望大家喜欢吧</p>
                 </div>
             </div>
+            <div class="two wide column"></div>
         </div>
         <div class="ui inverted section divider"></div>
         <p style="opacity: 0.4;">©2020 tyrant-convergent</p>
