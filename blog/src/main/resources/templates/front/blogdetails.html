@@ -49,31 +49,33 @@
         <div class="ui top attached segment">
             <div class="ui horizontal small link list">
                 <div class="item">
-                    <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
+                    <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image" th:src="@{${blog.user}==null?'/images/kobe.jpg':${blog.user.avatar}}">
                     <div class="content">
-                        <div class="header text-thin">tyrant</div>
+                        <div class="header text-thin" th:text="${blog.user}==null?'游客':${blog.user.nickname}">tyrant</div>
                     </div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i>2020-01-01
+                    <i class="calendar icon" ></i>
+                        <span class="text-thin" th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-01-01</span>
                 </div>
                 <div class="item">
-                    <i class="eye icon"></i>123
+                    <i class="eye icon" ></i>
+                        <span class="text-thin" th:text="${blog.views}">123</span>
                 </div>
             </div>
         </div>
         <!--图片-->
         <div class="ui attached segment">
-            <img src="../../static/images/kobe.jpg" alt="" class="ui fluid rounded image">
+            <img src="../../static/images/kobe.jpg" alt="" class="ui fluid rounded image" th:src="@{${blog.firstPicture}==null?'/images/kobe.jpg':${blog.firstPicture}}">
         </div>
         <!--内容-->
         <div class="ui attached padded segment">
             <div class="ui right aligned basic segment">
-                <div class="ui red basic label">原创</div>
+                <div class="ui red basic label" th:text="${blog.flag}">原创</div>
             </div>
             <!--文章内容-->
-            <h2 id="h2_1" class="ui center aligned header">第一篇博客</h2>
-            <div id="content" class="typo typo-selection js-toc-content padded-lr-big-responsive margin-td-small">
+            <h2 id="h2_1" class="ui center aligned header" th:text="${blog.title}">第一篇博客</h2>
+            <div id="content" class="typo typo-selection js-toc-content padded-lr-big-responsive margin-td-small" th:utext="${blog.content}">
                 <h3 id="h2_1_3_1"><a id="_0"></a>开场</h3>
                 <p>​
                     今天跟大家聊聊微服务的概念以及我对微服务的理解，目的是为了让准备学习微服务一系列知识的小伙伴大概了解一下自己都要学啥，为啥学。当然，微服务是一个概念，所有语言都适用，本篇仅以Java为例。嗯，很严肃的开场白，话不多说，开整。</p>
@@ -132,9 +134,10 @@
                 <p>​ 好啦，本篇主要将微服务和单体应用之间进行了对比，彰显了微服务的优点。但是有优就有劣，以后会接着本篇谈谈微服务的劣势等。</p>
                 <p>​ ps：如果有小伙伴或者大佬觉得有错误的地方，可以纠正我，万分感谢~我是小白一个，嗯。至此，撒花~</p>
             </div>
+
             <!--标签-->
-            <div class="padded-lr-big-responsive margin-td-small">
-                <a class="ui basic teal left pointing label">SpringBoot</a>
+            <div class="padded-lr-big-responsive margin-td-small" >
+                <a class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">SpringBoot</a>
             </div>
             <!--赞赏-->
             <div class="ui center aligned basic segment">
@@ -144,12 +147,12 @@
                 <div class="ui red center aligned basic label">
                     <div class="ui  centered aligned images" style="font-size: inherit">
                         <div class="image">
-                            <img src="../../static/images/wechat.jpg" alt="" class="ui rounded bordered image"
+                            <img src="../../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui rounded bordered image"
                                  style="width: 120px">
                             <div>支付宝</div>
                         </div>
                         <div class="image">
-                            <img src="../../static/images/wechat.jpg" alt="" class="ui rounded bordered image"
+                            <img src="../../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui rounded bordered image"
                                  style="width: 120px">
                             <div>微信</div>
                         </div>
@@ -162,19 +165,22 @@
             <div class="ui middle aligned grid" style="margin-bottom: -1em;margin-top: -1em">
                 <div class="eleven wide column">
                     <ui class="list">
-                        <li>作者：tyrant</li>
-                        <li>发表时间：2020-01-01 12：00</li>
+                        <li>作者：<span th:text="${blog.user}==null?'游客':${blog.user.nickname}">tyrant</span><a
+                                href="#" target="_blank" th:src="@{/about}">（联系我）</a></li>
+                        <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-01-01 12：00</span></li>
                         <li>版权声明：自由转载-非商用-非衍生-保持署名</li>
                     </ui>
                 </div>
                 <div class="five wide column">
-                    <img src="../../static/images/wechat.jpg" alt="" class="ui rounded centered aligned bordered image"
+                    <img src="../../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui rounded centered aligned bordered image"
                          style="width: 100px">
                 </div>
             </div>
         </div>
+
+
         <!--留言 -->
-        <div id="comment-container" class="ui bottom attached segment">
+        <!--<div id="comment-container" class="ui bottom attached segment">
             <div class="ui teal segment" style="padding-bottom: 0">
                 <div class="form">
                     <div class="ui threaded comments">
@@ -268,13 +274,21 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
+
+
     </div>
 </div>
 
 <div id="toolbar" class="ui vertical icon buttons" style="position: fixed;bottom: 0;right: 0;z-index: 2;display: none">
     <button id="toc-button" href="#" class="ui teal button" type="button">目录</button>
-    <a href="#comment-content" class="ui teal button">留言</a>
+
+
+
+<!--    <a href="#comment-content" class="ui teal button">留言</a>-->
+
+
+
     <button id="wechatBolg-button" class="ui green icon button"><i class="weixin icon"></i></button>
     <div id="to-Top-button" class="ui red button"><i class="arrow up icon"></i></a>
     </div>
@@ -344,7 +358,7 @@
 <script src="../../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
 <script src="../../static/lib/qrcode/qrcode.js" th:src="@{/lib/qrcode/qrcode.js}"></script>
 <script src="../../static/lib/waypoints/jquery.waypoints.js" th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
-<script>
+<script th:inline="javascript">
     tocbot.init({
         tocSelector: '.js-toc',
         contentSelector: '.js-toc-content',
@@ -373,8 +387,11 @@
         position: 'left center'
     });
 
+    // var serurl ="http://www.yw-knight.xyz";
+    var serurl = "127.0.0.1:8090";
+    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
     var qrcode = new QRCode("wechatBlog", {
-        text: "http://jindo.dev.naver.com/collie",
+        text: serurl+url,
         width: 80,
         height: 80,
         colorDark: "#000000",

@@ -45,89 +45,104 @@
                 </div>
                 <!--aligned:对齐-->
                 <div class="column right aligned">
-                    共<h2 class="ui olive header inline-block"> 14 </h2>篇
+                    共<h2 class="ui olive header inline-block" th:text="${#arrays.length(types)}"> 14 </h2>种
                 </div>
             </div>
         </div>
         <div class="ui attached segment">
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic teal button">基础</div>
-                <a class="ui basic left pointing teal label">
-                    1,048
-                </a>
-            </div>
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic button">Web</div>
-                <a class="ui basic left pointing  label">
-                    1,048
-                </a>
-            </div>
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic  button">Spring</div>
-                <a class="ui basic left pointing  label">
-                    1,048
-                </a>
-            </div>
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic  button">IO流</div>
-                <a class="ui basic left pointing  label">
-                    1,048
-                </a>
-            </div>
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic  button">Docker</div>
-                <a class="ui basic left pointing  label">
-                    1,048
-                </a>
-            </div>
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic  button">集合</div>
-                <a class="ui basic left pointing  label">
-                    1,048
-                </a>
-            </div>
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic  button">并发</div>
-                <a class="ui basic left pointing  label">
-                    1,048
-                </a>
-            </div>
-            <div class="ui labeled button margin-td-mini" tabindex="0">
-                <div class="ui basic  button">SpringBoot</div>
-                <a class="ui basic left pointing  label">
-                    1,048
-                </a>
+            <div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
+                <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic  button" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${type.name}">思考与感悟</a>
+                <div class="ui basic  left pointing label" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${#arrays.length(type.blogs)}">24</div>
             </div>
         </div>
         <!--主体-->
         <div class="ui top attached teal segment">
-            <div class="ui padded vertical padded-td-large segment">
-                <div class="ui mobile reversed stackable grid">
+            <div class="ui padded vertical segment padded-td-large" th:each="blog : ${page.content}">
+                <div class="ui middle aligned mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
+                        <h3 class="text-spaced">
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}"
+                               target="_blank" class="font-black"
+                               th:text="${blog.title}"></a>
                         </h3>
-                        <p class="text-spaced">
+                        <p class="text-spaced"
+                           th:text="${blog.description}!=null?|${blog.description}......|">
                             在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                        <div class="ui stackable grid">
+                        <div class="ui  stackable grid">
                             <div class="twelve wide column">
                                 <div class="ui horizontal small link list">
                                     <div class="item">
-                                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
+                                        <img src="../static/images/kobe.jpg"
+                                             th:src="@{${blog.user}==null?'/images/kobe.jpg':${blog.user.avatar}}"
+                                             alt=""
+                                             class="ui avatar image">
                                         <div class="content">
-                                            <div class="header text-thin">tyrant</div>
+                                            <div class="header text-thin"
+                                                 th:text="${blog.user}==null?'游客':${blog.user.nickname}">
+                                                tyrant
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <i class="calendar icon"></i>2020-01-01
+                                        <i class="calendar icon"></i><span
+                                            th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-01-01</span>
                                     </div>
                                     <div class="item">
-                                        <i class="eye icon"></i>123
+                                        <i class="eye icon"></i><span th:text="${blog.views}">123</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="four wide column right aligned">
+                            <div class="four wide column">
                                 <a href="#" target="_blank"
-                                   class="ui basic teal label padded-mini text-thin">认知升级</a>
+                                   class="ui basic teal label padded-mini text-thin"
+                                   th:text="${blog.type.name}">认知升级</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="five wide column">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                            <img src="../static/images/kobe.jpg" alt=""
+                                 th:src="@{${blog.firstPicture}==null?'/images/kobe.jpg':${blog.firstPicture}}"
+                                 class="ui center aligned rounded image picture-size">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--/*-->
+            <div class="ui padded vertical padded-td-large segment">
+                <div class="ui mobile reversed stackable grid">
+                    <div class="eleven wide column">
+                        <div class="row" style="padding-bottom: 0.5em">
+                            <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
+                            </h3>
+                            <p class="text-spaced">
+                                在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui horizontal small link list">
+                                        <div class="item">
+                                            <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
+                                            <div class="content">
+                                                <div class="header text-thin">tyrant</div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i>2020-01-01
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i>123
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide column right aligned">
+                                    <a href="#" target="_blank"
+                                       class="ui basic teal label padded-mini text-thin">认知升级</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a href="#" class="ui basic teal left pointing label text-thin">基础</a>
                             </div>
                         </div>
                     </div>
@@ -142,30 +157,37 @@
             <div class="ui padded vertical padded-td-large segment">
                 <div class="ui mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
-                        </h3>
-                        <p class="text-spaced">
-                            在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                        <div class="ui stackable grid">
-                            <div class="twelve wide column">
-                                <div class="ui horizontal small link list">
-                                    <div class="item">
-                                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
-                                        <div class="content">
-                                            <div class="header text-thin">tyrant</div>
+                        <div class="row" style="padding-bottom: 0.5em">
+                            <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
+                            </h3>
+                            <p class="text-spaced">
+                                在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui horizontal small link list">
+                                        <div class="item">
+                                            <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
+                                            <div class="content">
+                                                <div class="header text-thin">tyrant</div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i>2020-01-01
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i>123
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <i class="calendar icon"></i>2020-01-01
-                                    </div>
-                                    <div class="item">
-                                        <i class="eye icon"></i>123
-                                    </div>
+                                </div>
+                                <div class="four wide column right aligned">
+                                    <a href="#" target="_blank"
+                                       class="ui basic teal label padded-mini text-thin">认知升级</a>
                                 </div>
                             </div>
-                            <div class="four wide column right aligned">
-                                <a href="#" target="_blank"
-                                   class="ui basic teal label padded-mini text-thin">认知升级</a>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a href="#" class="ui basic teal left pointing label text-thin">基础</a>
                             </div>
                         </div>
                     </div>
@@ -180,30 +202,37 @@
             <div class="ui padded vertical padded-td-large segment">
                 <div class="ui mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
-                        </h3>
-                        <p class="text-spaced">
-                            在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                        <div class="ui stackable grid">
-                            <div class="twelve wide column">
-                                <div class="ui horizontal small link list">
-                                    <div class="item">
-                                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
-                                        <div class="content">
-                                            <div class="header text-thin">tyrant</div>
+                        <div class="row" style="padding-bottom: 0.5em">
+                            <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
+                            </h3>
+                            <p class="text-spaced">
+                                在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui horizontal small link list">
+                                        <div class="item">
+                                            <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
+                                            <div class="content">
+                                                <div class="header text-thin">tyrant</div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i>2020-01-01
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i>123
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <i class="calendar icon"></i>2020-01-01
-                                    </div>
-                                    <div class="item">
-                                        <i class="eye icon"></i>123
-                                    </div>
+                                </div>
+                                <div class="four wide column right aligned">
+                                    <a href="#" target="_blank"
+                                       class="ui basic teal label padded-mini text-thin">认知升级</a>
                                 </div>
                             </div>
-                            <div class="four wide column right aligned">
-                                <a href="#" target="_blank"
-                                   class="ui basic teal label padded-mini text-thin">认知升级</a>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a href="#" class="ui basic teal left pointing label text-thin">基础</a>
                             </div>
                         </div>
                     </div>
@@ -218,30 +247,37 @@
             <div class="ui padded vertical padded-td-large segment">
                 <div class="ui mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
-                        </h3>
-                        <p class="text-spaced">
-                            在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                        <div class="ui stackable grid">
-                            <div class="twelve wide column">
-                                <div class="ui horizontal small link list">
-                                    <div class="item">
-                                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
-                                        <div class="content">
-                                            <div class="header text-thin">tyrant</div>
+                        <div class="row" style="padding-bottom: 0.5em">
+                            <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
+                            </h3>
+                            <p class="text-spaced">
+                                在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
+                            <div class="ui stackable grid">
+                                <div class="twelve wide column">
+                                    <div class="ui horizontal small link list">
+                                        <div class="item">
+                                            <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
+                                            <div class="content">
+                                                <div class="header text-thin">tyrant</div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i>2020-01-01
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i>123
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <i class="calendar icon"></i>2020-01-01
-                                    </div>
-                                    <div class="item">
-                                        <i class="eye icon"></i>123
-                                    </div>
+                                </div>
+                                <div class="four wide column right aligned">
+                                    <a href="#" target="_blank"
+                                       class="ui basic teal label padded-mini text-thin">认知升级</a>
                                 </div>
                             </div>
-                            <div class="four wide column right aligned">
-                                <a href="#" target="_blank"
-                                   class="ui basic teal label padded-mini text-thin">认知升级</a>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a href="#" class="ui basic teal left pointing label text-thin">基础</a>
                             </div>
                         </div>
                     </div>
@@ -253,56 +289,16 @@
                     </div>
                 </div>
             </div>
-            <div class="ui padded vertical padded-td-large segment">
-                <div class="ui mobile reversed stackable grid">
-                    <div class="eleven wide column">
-                        <h3 class="text-spaced"><a href="#" target="_blank" class="font-black">你真的理解财富自由吗？</a>
-                        </h3>
-                        <p class="text-spaced">
-                            在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提...</p>
-                        <div class="ui stackable grid">
-                            <div class="twelve wide column">
-                                <div class="ui horizontal small link list">
-                                    <div class="item">
-                                        <img src="../../static/images/kobe.jpg" alt="" class="ui avatar image">
-                                        <div class="content">
-                                            <div class="header text-thin">tyrant</div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <i class="calendar icon"></i>2020-01-01
-                                    </div>
-                                    <div class="item">
-                                        <i class="eye icon"></i>123
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four wide column right aligned">
-                                <a href="#" target="_blank"
-                                   class="ui basic teal label padded-mini text-thin">认知升级</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="five wide column">
-                        <a href="#" target="_blank">
-                            <img src="../../static/images/kobe.jpg" alt=""
-                                 class="ui center aligned rounded image picture-size">
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <!--*/-->
         </div>
         <!--分页-->
-        <div class="ui attached segment">
+        <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
             <div class="ui middle aligned two column grid">
                 <div class="column">
-                    <button class="ui teal labeled icon button" rel="#"><i class="left arrow icon"></i> 上一页
-                    </button>
+                    <a href="#" th:href="@{'/tags/'+${activeTagId}(page=${page.number}-1)}"  th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
                 </div>
-                <div class="column right aligned">
-                    <button class="ui teal right labeled icon button" rel="#"><i class="right arrow icon"></i>
-                        下一页
-                    </button>
+                <div class="right aligned column">
+                    <a href="#" th:href="@{'/tags/'+${activeTagId}(page=${page.number}+1)}"  th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
                 </div>
             </div>
         </div>
