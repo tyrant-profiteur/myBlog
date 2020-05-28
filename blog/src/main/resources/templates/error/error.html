@@ -12,7 +12,7 @@
 <!--导航
         引用ui里的元素 attached:没有圆角
 -->
-<nav class="ui inverted attached segment padded-td-mini m-shadow-small">
+<nav class="ui inverted attached segment padded-td-mini m-shadow-small" th:replace="front/_fragmentsfront :: menu(0)">
     <div class="ui inverted container">
         <div class="ui inverted stackable menu">
             <h3 class="ui teal header item"><i class="cogs icon"></i>后台管理</h3>
