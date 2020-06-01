@@ -570,3 +570,7 @@ Caused by: java.lang.NumberFormatException: For input string: "null"
 2020-05-28 15:28:24.662  INFO 23440 --- [http-nio-8090-exec-1] com.ywknight.blog.aspect.LogAspect       : response : index :: blogList
 2020-05-28 15:28:26.477  INFO 23440 --- [http-nio-8090-exec-3] com.ywknight.blog.aspect.LogAspect       : request : RequestLog{url='http://localhost:8090/indexblog', ip='0:0:0:0:0:0:0:1', ClassMethod='com.ywknight.blog.controller.IndexController.search', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
 2020-05-28 15:28:26.488  INFO 23440 --- [http-nio-8090-exec-3] com.ywknight.blog.aspect.LogAspect       : response : index :: blogList
+2020-05-28 17:34:19.847  INFO 23440 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-28 17:34:19.850  INFO 23440 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-05-28 17:34:19.862  INFO 23440 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-05-28 17:34:19.868  INFO 23440 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

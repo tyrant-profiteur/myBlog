@@ -18,7 +18,7 @@ logging:
     com.ywknight.blog: debug
   file:
     name: blog-dev.log
-    path: ../blog/
+    path: ./../blog/
 
 server:
   port: 8090
