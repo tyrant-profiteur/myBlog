@@ -269,17 +269,17 @@
                         <!--*/-->
                     </div>
                 </div>
-                <!--左边底部-->
 
+                <!--左边底部-->
                 <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
-                    <input type="hidden" name="page">
+<!--                    <input type="hidden" name="page">-->
                     <div class="ui middle aligned three column grid">
                         <div class="column">
                             <a onclick="page(this)" th:attr="data-page=${page.number}-1"
                                class="ui mini teal basic button">上一页</a>
                         </div>
                         <div class="center aligned column">
-                            <!--                            <p th:text="${page.number}"></p>-->
+                                                        <p th:text="${page.pageable['page']}"></p>
                         </div>
                         <div class="right aligned column">
                             <a onclick="page(this)" th:attr="data-page=${page.number}+1"
@@ -472,14 +472,13 @@
     });
 
     function page(obj) {
-        $("[name='page']").val($(obj).data("page"));
-        loaddata();
+        loaddata(obj);
         $("body,html").animate({scrollTop:0},500)
     }
 
-    function loaddata() {
+    function loaddata(obj) {
         $('#blog-container').load("/indexblog", {
-            page: $("[name='page']").val()
+            page: $(obj).data("page")
         });
     }
 </script>

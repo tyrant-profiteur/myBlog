@@ -3,4 +3,4 @@ spring:
   thymeleaf:
     mode: HTML
   profiles:
-    active: @env@
+    active: '@env@'
