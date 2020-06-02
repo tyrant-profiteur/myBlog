@@ -56,11 +56,11 @@
                     </div>
                 </div>
                 <!--左边列表-->
-                <div id="blog-container" class="ui attached segment">
+                <div id="blog-container" class="ui attached segment" style="">
                     <div th:fragment="blogList">
-                        <div class="ui padded vertical segment padded-td-large" th:each="blog : ${page.content}">
+                        <div class="ui padded vertical segment padded-td-large padded-lr-mini" th:each="blog : ${page.content}">
                             <div class="ui middle aligned mobile reversed stackable grid">
-                                <div class="eleven wide column">
+                                <div class="ten wide column">
                                     <h3 class="text-spaced">
                                         <a href="#" th:href="@{/blog/{id}(id=${blog.id})}"
                                            target="_blank" class="font-black"
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="five wide column">
+                                <div class="six wide column">
                                     <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
                                         <img src="../static/images/kobe.jpg" alt=""
                                              th:src="@{${blog.firstPicture}==null?'/images/kobe.jpg':${blog.firstPicture}}"
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <!--/*-->
-                        <div class="ui padded vertical segment padded-td-large">
+                        <div class="ui padded vertical segment padded-td-large padded-lr-mini">
                             <div class="ui mobile reversed stackable grid">
                                 <div class="eleven wide column">
                                     <h3 class="text-spaced">你真的理解财富自由吗？</h3>
@@ -149,7 +149,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ui padded vertical segment padded-td-large">
+                        <div class="ui padded vertical segment padded-td-large padded-lr-mini">
                             <div class="ui mobile reversed stackable grid">
                                 <div class="eleven wide column">
                                     <h3 class="text-spaced">你真的理解财富自由吗？</h3>
@@ -188,7 +188,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ui padded vertical segment padded-td-large">
+                        <div class="ui padded vertical segment padded-td-large padded-lr-mini">
                             <div class="ui mobile reversed stackable grid">
                                 <div class="eleven wide column">
                                     <h3 class="text-spaced">你真的理解财富自由吗？</h3>
@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ui padded vertical segment padded-td-large">
+                        <div class="ui padded vertical segment padded-td-large padded-lr-mini">
                             <div class="ui mobile reversed stackable grid">
                                 <div class="eleven wide column">
                                     <h3 class="text-spaced">你真的理解财富自由吗？</h3>
@@ -267,26 +267,26 @@
                             </div>
                         </div>
                         <!--*/-->
+                        <!--左边底部-->
+                        <div class="ui container" th:if="${page.totalPages}>1" style="margin-top: 10px;">
+                            <div class="ui middle aligned three column grid">
+                                <div class="column">
+                                    <a onclick="page(this)" th:attr="data-page=${page.number}-1"
+                                       class="ui mini teal basic button">上一页</a>
+                                </div>
+                                <div class="center aligned column">
+                                    <p th:text="${page.number}+1"></p>
+                                </div>
+                                <div class="right aligned column">
+                                    <a onclick="page(this)" th:attr="data-page=${page.number}+1"
+                                       class="ui mini teal basic button">下一页</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!--左边底部-->
-                <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
-<!--                    <input type="hidden" name="page">-->
-                    <div class="ui middle aligned three column grid">
-                        <div class="column">
-                            <a onclick="page(this)" th:attr="data-page=${page.number}-1"
-                               class="ui mini teal basic button">上一页</a>
-                        </div>
-                        <div class="center aligned column">
-                                                        <p th:text="${page.pageable['page']}"></p>
-                        </div>
-                        <div class="right aligned column">
-                            <a onclick="page(this)" th:attr="data-page=${page.number}+1"
-                               class="ui mini teal basic button">下一页</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <!--右边-->
             <div class="five wide column ">
@@ -345,7 +345,8 @@
                     </div>
                     <div class="ui teal segment">
                         <div class="column">
-                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic teal left pointing label margin-td-mini"
+                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}"
+                               class="ui basic teal left pointing label margin-td-mini"
                                th:each="tag : ${tags}">
                                 <span th:text="${tag.name}">基础</span>
                                 <div class="detail" th:text="${#arrays.length(tag.name)}">23</div>
@@ -473,7 +474,7 @@
 
     function page(obj) {
         loaddata(obj);
-        $("body,html").animate({scrollTop:0},500)
+        $("body,html").animate({scrollTop: 0}, 500)
     }
 
     function loaddata(obj) {

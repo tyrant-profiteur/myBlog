@@ -14,13 +14,15 @@ body{
 }
 
 .padded-td-large{
-    padding-top: 2em !important;
     padding-bottom: 2em !important;
 }
 .padded-mini{
     padding: 0.2em !important;
 }
-
+.padded-lr-mini{
+    padding-right: 3% !important;
+    padding-left: 3% !important;
+}
 .padded-small{
     padding: 0.6em !important;
 }
@@ -80,9 +82,15 @@ body{
 }
 
 /*容器宽度*/
-.blog-container{
+ .blog-container{
     max-width: 80% !important;
-    margin:auto !important;
+    margin: auto !important;
+    padding-top: 0 !important;
+}
+
+#blog-container{
+    margin: auto !important;
+    padding-top: 0 !important;
 }
 
 /*color*/

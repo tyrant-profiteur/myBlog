@@ -75,6 +75,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--markdown格式解析-->
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>
